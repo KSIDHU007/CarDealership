@@ -1,0 +1,199 @@
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  padding: 1rem;
+}
+
+.navbar .logo {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links a, .btn-location {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: red;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-links a:hover, .btn-location:hover {
+  background-color: darkred;
+}
+
+  
+  /* Car Card */
+/* Car list to display as a 3-column grid */
+.car-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
+  gap: 20px; /* Add some space between the cards */
+  margin-top: 20px;
+}
+
+/* Style for individual car cards */
+.car-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 550px; /* Set a fixed height */
+  width: 500px;  /* Set a fixed width */
+  box-sizing: border-box;
+}
+
+.car-card img {
+  width: 100%;
+  height: 150px; /* Fixed height for all images */
+  object-fit: contain; /* Ensure the image scales without distortion */
+}
+
+.car-info {
+  margin-top: 10px;
+  flex-grow: 1;
+}
+
+.car-info h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.car-info p {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.car-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.car-actions button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.car-actions button:last-child {
+  margin-right: 0;
+}
+
+.car-actions button:hover {
+  background-color: #c0392b;
+}
+  
+  /* General Layout */
+  .container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  /* Filter Panel */
+  .filter-panel {
+    width: 350px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 25px;
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+
+.filter-panel h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter-group select, 
+.filter-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-row .filter-group {
+  flex: 1;
+}
+
+.search-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-group input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn-search {
+  padding: 8px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-search:hover {
+  background-color: #c0392b;
+}
+
+/* Banner Section */
+.banner {
+  width: 100%;
+  height: 400px; /* Adjust height as needed */
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.Custbanner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the banner area */
+}
