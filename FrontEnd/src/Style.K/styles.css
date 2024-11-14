@@ -1,0 +1,265 @@
+/* Navbar styles */
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  height: 200px;
+  width: auto;
+  margin-right: 10px;
+  margin-top: -40px;
+  margin-bottom: -30px;
+}
+
+.logo h1 {
+  font-size: 1.8rem;
+  color: #e74c3c;
+  margin: 0;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #e74c3c;
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  color: #e74c3c;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.cta-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #c0392b;
+}
+
+.profile-icon {
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.profile-icon:hover {
+  color: #e74c3c;
+  transform: translateY(-3px);
+}
+
+/* Banner Section */
+.banner {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.Custbanner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* General Layout */
+.container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+/* Filter Panel */
+.filter-panel {
+  width: 300px;
+  padding: 20px;
+  margin-right: 50px;
+  background-color: #f4f4f4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.filter-panel h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.filter-group {
+  margin-bottom: 15px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filter-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filter-row .filter-group {
+  flex: 1;
+}
+
+.search-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-group input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.btn-search {
+  padding: 8px 12px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-search:hover {
+  background-color: #c0392b;
+}
+
+/* Car Card Section */
+.car-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.car-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+}
+
+.car-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.car-info {
+  flex-grow: 1;
+}
+
+.car-info h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.car-info p {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.car-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.car-actions button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.car-actions button:hover {
+  background-color: #c0392b;
+}
