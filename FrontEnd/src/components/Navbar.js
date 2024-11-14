@@ -1,20 +1,37 @@
 import React from 'react';
-import '../styles.css';
+import '../Style.K/styles.css'; // Correct path to your global styles
+// Uncomment if using Font Awesome
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="logo">Name</div>
-      <ul className="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#inventory">Inventory</a></li>
-        <li><a href="#repair">Auto Repair</a></li>
-        <li><a href="#wheels">Wheels and Tires</a></li>
-        <li><a href="#finance">Finance</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><button className="btn-location">Location</button></li>
-      </ul>
-    </nav>
+    <header className="navbar">
+      <div className="navbar-container">
+        {/* Left-aligned Logo Section */}
+        <div className="logo">
+          <img src="/Images/MAJHAIL_DEALERSHIP-removebg-preview.png" alt="Car Dealership Logo" className="logo-image" />
+          <h1>MAJHAIL DEALERSHIP</h1>
+        </div>
+
+        {/* Right-aligned Navigation Links, CTA, and Profile Icon */}
+        <div className="nav-right">
+          <nav className="nav-links">
+            <a href="#home">Home</a>
+            <a href="#inventory">Inventory</a>
+            <a href="#repair">Auto Repair</a>
+            <a href="#wheels">Wheels and Tires</a>
+            <a href="#finance">Finance</a>
+            <a href="#about">About Us</a>
+          </nav>
+          <button className="cta-button">Location</button>
+          
+          {/* User Profile Icon */}
+          {/* Option A: Font Awesome Icon */}
+          {<FontAwesomeIcon icon={faUserCircle} className="profile-icon" />}
+        </div>
+      </div>
+    </header>
   );
 };
 

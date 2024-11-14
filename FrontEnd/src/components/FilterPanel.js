@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles.css'; // Ensure global styles are applied
+import '../Style.K/styles.css'; // Correct path to your global styles
 
 const FilterPanel = () => {
   return (
