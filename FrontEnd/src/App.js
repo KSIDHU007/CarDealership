@@ -1,41 +1,40 @@
-// src/App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import CarDetails from './pages/CarDetails';
-import Login from './pages/Login';
-import './Style.K/styles.css';
+import LandingPage from './pages/LandingPage'; // Import LandingPage
+import Home from './pages/Home'; // Import Home page for inventory
+import CarDetails from './pages/CarDetails'; // Import CarDetails page
+import Login from './pages/Login'; // Import Login page
+import SignIn from './pages/SignIn'; // Import SignIn page
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [selectedCar, setSelectedCar] = useState(null);
+    const [user, setUser] = useState(null);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-  };
+    const handleLogin = (userData) => {
+        setUser(userData);
+    };
 
-  const handleViewDetails = (car) => {
-    setSelectedCar(car);
-  };
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {/* Route for Landing Page */}
+                    <Route path="/" element={<LandingPage />} />
 
-  return (
-    <Router>
-      <div className="App">
-        <Routes>
-          {/* Route for the Landing Page as the root page */}
+                    {/* Route for Home page (Inventory) */}
+                    <Route path="/inventory" element={<Home />} />
 
-          {/* Route for Home page - accessible via /inventory */}
-          <Route path="/inventory" element={<Home onViewDetails={handleViewDetails} />} />
+                    {/* Route for Car Details page */}
+                    <Route path="/car-details" element={<CarDetails />} />
 
-          {/* Route for Car Details page */}
-          <Route path="/car-details" element={<CarDetails car={selectedCar} />} />
+                    {/* Route for Login page */}
+                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
 
-          {/* Route for Login page */}
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+                    {/* Route for Sign Up page */}
+                    <Route path="/signup" element={<SignIn />} />
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
