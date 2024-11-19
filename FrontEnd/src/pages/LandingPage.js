@@ -6,7 +6,7 @@ import '../Style.T/LandingPage.css';
 const LandingPage = () => {
     return (
         <div className="landing-page">
-            <Navbar /> {/* Add Navbar at the top */}
+            <Navbar />
 
             {/* Hero Section */}
             <section className="hero">

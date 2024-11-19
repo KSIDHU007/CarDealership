@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import '../Style.K/styles.css';
+import '../Style.K/styles.css'; // Ensure this points to your CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,7 +12,9 @@ const Navbar = () => {
             <div className="navbar-container">
                 {/* Left-aligned Logo Section */}
                 <div className="logo">
-                    <img src="/Images/MAJHAIL_DEALERSHIP-removebg-preview.png" alt="Car Dealership Logo" className="logo-image" />
+                    <Link to="/">
+                        <img src="/Images/MAJHAIL_DEALERSHIP-removebg-preview.png" alt="Car Dealership Logo" className="logo-image" />
+                    </Link>
                     <h1>MAJHAIL DEALERSHIP</h1>
                 </div>
 
@@ -34,7 +36,9 @@ const Navbar = () => {
                             Sign Up
                         </Link>
                     ) : (
-                        <FontAwesomeIcon icon={faUserCircle} className="profile-icon" />
+                        <Link to="/login">
+                            <FontAwesomeIcon icon={faUserCircle} className="profile-icon" />
+                        </Link>
                     )}
                 </div>
             </div>
