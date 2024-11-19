@@ -7,14 +7,15 @@ html, body {
   
   /* Background image and flexbox for centering the form */
   .sign-in-page {
-    background-image: url("C:\Users\skanw\OneDrive\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
+    background-image: url("C:\Users\Tarun\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;  /* Ensure it covers full viewport height */
+    height: 600px;
     color: white;
+    padding-top: 80px;
   }
   
   /* Sign-in form container */
@@ -26,6 +27,7 @@ html, body {
     text-align: center;
     width: 90%;  /* Full width */
     max-width: 400px; /* Maximum width for the form */
+    align-items: center;
   }
   
   /* Heading style */
@@ -40,7 +42,7 @@ html, body {
   input[type="password"],
   input[type="email"],
   input[type="tel"] {
-    width: 100%;
+    width: 350px;
     padding: 12px;
     margin: 10px 0;
     border: 1px solid #ccc;

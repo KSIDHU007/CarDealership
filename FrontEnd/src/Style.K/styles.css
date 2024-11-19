@@ -9,6 +9,12 @@
   display: flex;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center; /* Aligns items vertically */
+  gap: 20px; /* Adds space between items */
+}
+
 .navbar-container {
   display: flex;
   align-items: center;
@@ -28,6 +34,8 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-left: 23px;
+
 }
 
 .signup-button:hover {
@@ -99,19 +107,22 @@
   width: 100%;  /* Expand the underline to full width */
 }
 
-/* Call-to-Action button styles */
-.cta-button {
+.cta-LocationButton {
   background-color: #e74c3c;
   color: white;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 16px; /* Adjusted font size */
   cursor: pointer;
   transition: background-color 0.3s;
+  height: 40px; /* Standard height */
+  padding: 0 20px; /* Add some padding */
+  display: flex;
+  justify-content: center; /* Centers text horizontally */
+  align-items: center; /* Centers text vertically */
 }
 
-.cta-button:hover {
+.cta-LocationButton:hover {
   background-color: #c0392b;
 }
 

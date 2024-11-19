@@ -7,15 +7,15 @@ html, body {
   }
   
   .login-page {
-    background-image: url("C:\Users\skanw\OneDrive\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
+    background-image: url("C:\Users\Tarun\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 600px;
     color: black;
-    padding-top: 80px; /* Adjust based on your navbar height */
+    padding-top: 80px;
   }
   
   .login-container {
@@ -36,7 +36,7 @@ html, body {
   
   input[type="text"],
   input[type="password"] {
-    width: 100%;
+    width: 400px;
     padding: 12px; /* Increased padding for better usability */
     margin: 10px 0;
     border: 1px solid #ccc; /* Light border */

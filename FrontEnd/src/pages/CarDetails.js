@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar'; // Import the Navbar component
 import '../Style.K/CarDetails.css';
+import { Link } from 'react-router-dom';
+
 
 const CarDetails = () => {
     const navigate = useNavigate();
@@ -58,9 +60,9 @@ const CarDetails = () => {
                         </div>
 
                         <div className="action-buttons">
-                            <button className="info-button">Get More Information</button>
-                            <button className="finance-button">Apply for Financing</button>
-                            <button className="directions-button">Get Directions</button>
+                        <Link to="/appointment" className="info-button">Get More Information</Link>
+                        <Link to="/apply-financing" className="finance-button">Apply for Financing</Link>
+                        <Link to="/directions" className="directions-button">Get Directions</Link>
                         </div>
 
                         <div className="location-info">

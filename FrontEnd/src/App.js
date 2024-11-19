@@ -5,7 +5,8 @@ import Home from './pages/Home'; // Import Home page for inventory
 import CarDetails from './pages/CarDetails'; // Import CarDetails page
 import Login from './pages/Login'; // Import Login page
 import SignIn from './pages/SignIn'; // Import SignIn page
-import './Style.K/styles.css'; // Ensure your global styles are applied
+import AppointmentPage from './pages/Booking'; // Import the AppointmentPage component
+
 
 function App() {
     const [user, setUser] = useState(null);
@@ -32,6 +33,9 @@ function App() {
 
                     {/* Route for Sign Up page */}
                     <Route path="/signup" element={<SignIn />} />
+
+                    <Route path="/appointment" element={<AppointmentPage />} />
+
                 </Routes>
             </div>
         </Router>
