@@ -6,6 +6,7 @@ import CarDetails from './pages/CarDetails'; // Import CarDetails page
 import Login from './pages/Login'; // Import Login page
 import SignIn from './pages/SignIn'; // Import SignIn page
 import AppointmentPage from './pages/Booking'; // Import the AppointmentPage component
+import Location from './pages/Location';
 
 
 function App() {
@@ -34,8 +35,10 @@ function App() {
                     {/* Route for Sign Up page */}
                     <Route path="/signup" element={<SignIn />} />
 
+                    {/* Route for appointment page */}
                     <Route path="/appointment" element={<AppointmentPage />} />
 
+                    <Route path="/location" element={<Location />} />
                 </Routes>
             </div>
         </Router>

@@ -28,7 +28,7 @@ const Navbar = () => {
                         <Link to="/finance">Finance</Link>
                         <Link to="/about">About Us</Link>
                     </nav>
-                    <button className="cta-LocationButton">Location</button>
+                    <a href="/location" className="cta-LocationButton">Location</a>
 
                     {/* Conditionally Render Sign Up Button or Profile Icon */}
                     {location.pathname === '/login' ? (
