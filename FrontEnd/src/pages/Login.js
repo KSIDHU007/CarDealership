@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
 import axios from 'axios';
@@ -8,26 +7,23 @@ import '../Style.T/Login.css'; // Import CSS for styling
 const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); // Initialize navigate
+    const [loading, setLoading] = useState(false); // Loading state for UX
+    const navigate = useNavigate(); // Initialize navigation
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true); // Show loading state
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/login', { username, password });
-            onLogin(response.data);
-            navigate('/profile'); // Redirect to profile or desired route upon successful login
+            const response = await axios.post('http://localhost:8080/auth/login', { username, password });
+            onLogin(response.data); // Pass user data to parent (optional)
+            alert('Login successful! Redirecting to the home page...');
+            navigate('/'); // Redirect to LandingPage ("/") after successful login
         } catch (error) {
-            console.error('Login failed', error);
-            alert('Login failed: Incorrect username or password.');
+            console.error('Login failed:', error.response?.data || error.message);
+            alert(error.response?.data?.message || 'Login failed: Incorrect username or password.');
+        } finally {
+            setLoading(false); // Hide loading state
         }
-    };
-
-    const handleForgotPassword = () => {
-        navigate('/forgot-password'); // Navigate to Forgot Password page
-    };
-
-    const handleSignUp = () => {
-        navigate('/sign-up'); // Navigate to Sign Up page
     };
 
     return (
@@ -51,18 +47,16 @@ const Login = ({ onLogin }) => {
                             placeholder="Password" 
                             required 
                         />
-                        <button type="submit" className="login-button">Login</button>
+                        <button type="submit" className="login-button" disabled={loading}>
+                            {loading ? 'Logging in...' : 'Login'}
+                        </button>
                     </form>
                     <p className="forgot-password">
-                        Forgot Password? <span className="sign-up" onClick={handleForgotPassword}>Click Here</span>
+                        Don’t have an account?{' '}
+                        <span className="sign-up-link" onClick={() => navigate('/signup')}>
+                            Sign Up Here
+                        </span>
                     </p>
-                    <p className="sign-up">
-                        Don’t have an account? <span className="sign-up-link" onClick={handleSignUp}>Sign Up</span>
-                    </p>
-                    <div className="social-buttons">
-                        <button className="facebook-button">Facebook</button>
-                        <button className="google-button">Google</button>
-                    </div>
                 </div>
             </div>
         </div>

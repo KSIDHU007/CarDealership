@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import LandingPage from './pages/LandingPage'; // Import LandingPage
 import Home from './pages/Home'; // Import Home page for inventory
 import CarDetails from './pages/CarDetails'; // Import CarDetails page
 import Login from './pages/Login'; // Import Login page
 import SignIn from './pages/SignIn'; // Import SignIn page
 import AppointmentPage from './pages/Booking'; // Import the AppointmentPage component
-
+import axios from 'axios'; // Axios for backend communication
 
 function App() {
     const [user, setUser] = useState(null);
 
-    const handleLogin = (userData) => {
-        setUser(userData);
+    // Function to handle user login
+    const handleLogin = async (credentials) => {
+        try {
+            const response = await axios.post('http://localhost:8080/auth/login', credentials);
+            setUser(response.data); // Save user data upon successful login
+            alert('Login successful!');
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('Invalid username or password.');
+        }
+    };
+
+    // Function to handle user signup
+    const handleSignup = async (userData) => {
+        try {
+            const response = await axios.post('http://localhost:8080/auth/register', userData);
+            alert('Signup successful! Please login.');
+        } catch (error) {
+            console.error('Signup error:', error);
+            alert('Signup failed. Please check your details.');
+        }
     };
 
     return (
@@ -29,13 +48,38 @@ function App() {
                     <Route path="/car-details" element={<CarDetails />} />
 
                     {/* Route for Login page */}
-                    <Route path="/login" element={<Login onLogin={handleLogin} />} />
+                    <Route
+                        path="/login"
+                        element={
+                            <Login
+                                onLogin={handleLogin}
+                                isAuthenticated={!!user}
+                            />
+                        }
+                    />
 
                     {/* Route for Sign Up page */}
-                    <Route path="/signup" element={<SignIn />} />
+                    <Route
+                        path="/signup"
+                        element={
+                            <SignIn
+                                onSignup={handleSignup}
+                                isAuthenticated={!!user}
+                            />
+                        }
+                    />
 
-                    <Route path="/appointment" element={<AppointmentPage />} />
-
+                    {/* Route for Appointment page */}
+                    <Route
+                        path="/appointment"
+                        element={
+                            user ? (
+                                <AppointmentPage />
+                            ) : (
+                                <Navigate to="/login" replace />
+                            )
+                        }
+                    />
                 </Routes>
             </div>
         </Router>

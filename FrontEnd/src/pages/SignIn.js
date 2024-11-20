@@ -7,25 +7,27 @@ import '../Style.T/SignIn.css'; // Import CSS for styling
 const SignIn = ({ onSignIn }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false); // Loading state for UX
     const navigate = useNavigate(); // Initialize navigation
 
     const handleSignIn = async (e) => {
         e.preventDefault();
+        setLoading(true); // Show loading state
         try {
-            const response = await axios.post('http://localhost:8080/api/auth/signup', {
+            const response = await axios.post('http://localhost:8080/auth/register', {
                 username,
                 email,
-                mobile,
                 password,
             });
-            alert('Sign up successful! Redirecting to login...');
-            onSignIn(response.data); // Pass the signup response to parent (optional)
-            navigate('/login'); // Redirect to login page after signup
+            alert('Sign up successful!');
+            onSignIn && onSignIn(response.data); // Pass signup data to parent (optional)
+            navigate('/'); // Redirect to LandingPage ("/") after successful signup
         } catch (error) {
-            console.error('Sign up failed', error);
+            console.error('Sign up failed:', error.response?.data || error.message);
             alert(error.response?.data?.message || 'Sign up failed: Please try again.');
+        } finally {
+            setLoading(false); // Hide loading state
         }
     };
 
@@ -51,23 +53,25 @@ const SignIn = ({ onSignIn }) => {
                             required
                         />
                         <input
-                            type="text"
-                            value={mobile}
-                            onChange={(e) => setMobile(e.target.value)}
-                            placeholder="Mobile Number"
-                            required
-                        />
-                        <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                             required
                         />
-                        <button type="submit" className="sign-in-button">
-                            Sign In
+                        <button type="submit" className="sign-in-button" disabled={loading}>
+                            {loading ? 'Signing up...' : 'Sign Up'}
                         </button>
                     </form>
+                    <p className="sign-in-login">
+                        Already have an account?{' '}
+                        <span
+                            className="login-link"
+                            onClick={() => navigate('/login')} // Navigate to login
+                        >
+                            Login Here
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
