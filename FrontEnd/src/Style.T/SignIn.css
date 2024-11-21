@@ -7,7 +7,7 @@ html, body {
   
   /* Background image and flexbox for centering the form */
   .sign-in-page {
-    background-image: url("C:\Users\Tarun\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
+    background-image: url("C:\Users\skanw\OneDrive\Documents\GitHub\CarDealership\FrontEnd\public\Images\ford.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
