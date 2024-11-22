@@ -20,14 +20,11 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            // Hash the password before saving
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
 
-            // Save the user
             User registeredUser = userService.registerUser(user);
 
-            // Return non-sensitive user details
             Map<String, Object> response = new HashMap<>();
             response.put("id", registeredUser.getId());
             response.put("username", registeredUser.getUsername());
@@ -44,15 +41,31 @@ public class AuthController {
         String username = credentials.get("username");
         String password = credentials.get("password");
 
+        if (username == null || password == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Username or password is missing"));
+        }
+
+        // Check for admin credentials
+        if (username.equals("admin") && password.equals("admin123")) {
+            return ResponseEntity.ok(Map.of(
+                    "role", "admin",
+                    "message", "Login successful as admin"
+            ));
+        }
+
+        // Handle regular user login
         return userService.findByUsername(username)
                 .map(user -> {
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     if (encoder.matches(password, user.getPassword())) {
-                        return ResponseEntity.ok(Map.of("message", "Login successful"));
+                        return ResponseEntity.ok(Map.of(
+                                "role", "user",
+                                "message", "Login successful as user"
+                        ));
                     } else {
-                        return ResponseEntity.badRequest().body(Map.of("error", "Invalid credentials"));
+                        return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
                     }
                 })
-                .orElse(ResponseEntity.badRequest().body(Map.of("error", "User not found")));
+                .orElse(ResponseEntity.status(401).body(Map.of("error", "User not found")));
     }
 }

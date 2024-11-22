@@ -15,12 +15,21 @@ const Login = ({ onLogin }) => {
         setLoading(true); // Show loading state
         try {
             const response = await axios.post('http://localhost:8081/auth/login', { username, password });
-            onLogin(response.data); // Pass user data to parent (optional)
-            alert('Login successful! Redirecting to the home page...');
-            navigate('/'); // Redirect to LandingPage ("/") after successful login
+
+            // Check if the logged-in user is admin or a regular user
+            if (response.data.role === 'admin') {
+                alert('Welcome Admin! Redirecting to the admin dashboard...');
+                navigate('/admin'); // Redirect to Admin Dashboard
+            } else if (response.data.role === 'user') {
+                alert('Login successful! Redirecting to the home page...');
+                navigate('/'); // Redirect to LandingPage ("/") for regular users
+            }
+
+            // Pass user data to parent (optional)
+            onLogin(response.data);
         } catch (error) {
             console.error('Login failed:', error.response?.data || error.message);
-            alert(error.response?.data?.message || 'Login failed: Incorrect username or password.');
+            alert(error.response?.error || 'Login failed: Incorrect username or password.');
         } finally {
             setLoading(false); // Hide loading state
         }

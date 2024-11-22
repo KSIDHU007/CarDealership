@@ -8,6 +8,8 @@ import SignIn from './pages/SignIn'; // Import SignIn page
 import AppointmentPage from './pages/Booking'; // Import the AppointmentPage component
 import axios from 'axios'; // Axios for backend communication
 import Location from './pages/Location'; // Import the AppointmentPage component
+import AdminPage from './pages/AdminPage';
+
 
 
 function App() {
@@ -48,6 +50,9 @@ function App() {
 
                     {/* Route for Car Details page */}
                     <Route path="/car-details" element={<CarDetails />} />
+
+                    <Route path="/admin" element={<AdminPage />} />
+
 
                     {/* Route for Login page */}
                     <Route
