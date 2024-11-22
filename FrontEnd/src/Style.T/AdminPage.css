@@ -1,0 +1,55 @@
+.admin-dashboard {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  h1, h2, h3 {
+    color: #333;
+  }
+  
+  .dashboard-sections {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .appointments-section, .inventory-section {
+    width: 100%;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-car-form, .edit-car-form {
+    margin-top: 20px;
+  }
+  
