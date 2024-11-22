@@ -245,65 +245,93 @@
 /* Car Card Section */
 .car-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
   gap: 20px;
   width: 100%;
+  padding: 20px; /* Add padding around the list */
+  box-sizing: border-box; /* Include padding in width/height calculation */
 }
 
 .car-card {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
+  overflow: hidden;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s ease;
+  height: 350px; /* Let height adjust dynamically */
+  width: 250px;
+  text-align: center;
+  transition: box-shadow 0.2s; /* Add hover shadow effect */
 }
 
 .car-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
 }
 
-.car-card img {
+.car-image {
   width: 100%;
-  height: 150px;
-  object-fit: contain;
+  height: 200px; /* Set fixed height for uniformity */
+  object-fit: cover; /* Ensure images fit without distortion */
   margin-bottom: 15px;
-}
-
-.car-info {
-  flex-grow: 1;
+  border-radius: 8px; /* Add slight rounding for images */
 }
 
 .car-info h4 {
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
+  color: #333; /* Set a consistent text color */
 }
 
 .car-info p {
   font-size: 1rem;
-  margin-bottom: 0.25rem;
+  margin: 5px 0;
+  color: #666; /* Slightly lighter color for secondary text */
 }
 
 .car-actions {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  justify-content: space-between; /* Space buttons evenly */
+  margin-top: 15px;
 }
 
 .car-actions button {
   background-color: #e74c3c;
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 8px;
-  flex: 1;
+  border-radius: 4px; /* Rounded edges */
+  padding: 12px 12px; /* Adjust padding for a better size */
   cursor: pointer;
+  flex: 1;
+  margin: 0 4px; /* Adjust margin for better spacing between buttons */
+  font-size: 13px; /* Slightly larger font size for better readability */
+  transition: transform 0.2s, background-color 0.2s; /* Add hover effect */
 }
 
 .car-actions button:hover {
-  background-color: #c0392b;
+  background-color: #c0392b; /* Darken the color on hover */
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.car-actions button:active {
+  transform: scale(0.95); /* Add press-down effect */
+}
+
+@media (max-width: 768px) {
+  .car-card {
+    padding: 15px;
+  }
+
+  .car-actions button {
+    font-size: 12px; /* Adjust button text size for smaller screens */
+    padding: 10px 15px;
+  }
+
+  .car-image {
+    height: 150px; /* Adjust image height for smaller cards */
+  }
 }

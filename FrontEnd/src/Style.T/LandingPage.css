@@ -69,7 +69,7 @@
     color: #333;
 }
 
-.car-grid {
+/*.car-grid {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -89,7 +89,7 @@
     width: 100%;
     height: auto;
     border-radius: 5px;
-}
+}*/
 
 /* Testimonials */
 .testimonials {

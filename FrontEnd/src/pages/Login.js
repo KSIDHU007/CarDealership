@@ -14,7 +14,7 @@ const Login = ({ onLogin }) => {
         e.preventDefault();
         setLoading(true); // Show loading state
         try {
-            const response = await axios.post('http://localhost:8080/auth/login', { username, password });
+            const response = await axios.post('http://localhost:8081/auth/login', { username, password });
             onLogin(response.data); // Pass user data to parent (optional)
             alert('Login successful! Redirecting to the home page...');
             navigate('/'); // Redirect to LandingPage ("/") after successful login

@@ -7,6 +7,8 @@ import Login from './pages/Login'; // Import Login page
 import SignIn from './pages/SignIn'; // Import SignIn page
 import AppointmentPage from './pages/Booking'; // Import the AppointmentPage component
 import axios from 'axios'; // Axios for backend communication
+import Location from './pages/Location'; // Import the AppointmentPage component
+
 
 function App() {
     const [user, setUser] = useState(null);
@@ -14,7 +16,7 @@ function App() {
     // Function to handle user login
     const handleLogin = async (credentials) => {
         try {
-            const response = await axios.post('http://localhost:8080/auth/login', credentials);
+            const response = await axios.post('http://localhost:8081/auth/login', credentials);
             setUser(response.data); // Save user data upon successful login
             alert('Login successful!');
         } catch (error) {
@@ -26,7 +28,7 @@ function App() {
     // Function to handle user signup
     const handleSignup = async (userData) => {
         try {
-            const response = await axios.post('http://localhost:8080/auth/register', userData);
+            const response = await axios.post('http://localhost:8081/auth/register', userData);
             alert('Signup successful! Please login.');
         } catch (error) {
             console.error('Signup error:', error);
@@ -69,17 +71,10 @@ function App() {
                         }
                     />
 
-                    {/* Route for Appointment page */}
-                    <Route
-                        path="/appointment"
-                        element={
-                            user ? (
-                                <AppointmentPage />
-                            ) : (
-                                <Navigate to="/login" replace />
-                            )
-                        }
-                    />
+                    {/* Route for Appointment Booking */}
+                    <Route path="/booking" element={<AppointmentPage />} />
+                    <Route path="/Location" element={<Location />} />
+
                 </Routes>
             </div>
         </Router>

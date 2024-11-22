@@ -15,7 +15,7 @@ const SignIn = ({ onSignIn }) => {
         e.preventDefault();
         setLoading(true); // Show loading state
         try {
-            const response = await axios.post('http://localhost:8080/auth/register', {
+            const response = await axios.post('http://localhost:8081/auth/register', {
                 username,
                 email,
                 password,

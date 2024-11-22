@@ -28,4 +28,9 @@ public class InventoryService {
     public boolean existsById(Long id) {
         return inventoryRepository.existsById(id);
     }
+
+    public Optional<Inventory> getInventoryById(Long id) {
+        return inventoryRepository.findById(id);
+    }
+
 }
