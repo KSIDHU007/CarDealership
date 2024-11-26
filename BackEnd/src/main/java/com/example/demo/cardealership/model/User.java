@@ -1,20 +1,22 @@
 package com.example.demo.cardealership.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
+
     private String email;
+
     private String password;
+
+    @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'user'")
+    private String role; // Set default role to "user"
+
 
     // Getters and Setters
     public Long getId() {
@@ -47,5 +49,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

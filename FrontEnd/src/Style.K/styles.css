@@ -262,7 +262,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 370px; /* Let height adjust dynamically */
+  height: 400px; /* Let height adjust dynamically */
   width: 250px;
   text-align: center;
   transition: box-shadow 0.2s; /* Add hover shadow effect */

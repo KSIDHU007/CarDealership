@@ -29,7 +29,7 @@ const Login = ({ onLogin }) => {
             onLogin(response.data);
         } catch (error) {
             console.error('Login failed:', error.response?.data || error.message);
-            alert(error.response?.error || 'Login failed: Incorrect username or password.');
+            alert(error.response?.data?.error || 'Login failed: Incorrect username or password.');
         } finally {
             setLoading(false); // Hide loading state
         }
@@ -40,7 +40,7 @@ const Login = ({ onLogin }) => {
             <Navbar />
             <div className="login-page">
                 <div className="login-container">
-                    <h1>BE A MAJHAIL!!</h1>
+                    <h1>Welcome Back!</h1>
                     <form onSubmit={handleLogin}>
                         <input 
                             type="text" 

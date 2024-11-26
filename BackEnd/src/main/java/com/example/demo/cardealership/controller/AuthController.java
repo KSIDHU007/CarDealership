@@ -17,18 +17,28 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Registers a new user with a default role of "user" unless specified otherwise.
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
 
+            // Ensure the role is "user" if not explicitly provided
+            if (user.getRole() == null || user.getRole().isEmpty()) {
+                user.setRole("user");
+            }
+
             User registeredUser = userService.registerUser(user);
 
+            // Build response with non-sensitive user details
             Map<String, Object> response = new HashMap<>();
             response.put("id", registeredUser.getId());
             response.put("username", registeredUser.getUsername());
             response.put("email", registeredUser.getEmail());
+            response.put("role", registeredUser.getRole());
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -36,6 +46,9 @@ public class AuthController {
         }
     }
 
+    /**
+     * Authenticates a user and determines their role for access control.
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
@@ -45,7 +58,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(Map.of("error", "Username or password is missing"));
         }
 
-        // Check for admin credentials
+        // Check for hardcoded admin credentials
         if (username.equals("admin") && password.equals("admin123")) {
             return ResponseEntity.ok(Map.of(
                     "role", "admin",
@@ -59,8 +72,8 @@ public class AuthController {
                     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                     if (encoder.matches(password, user.getPassword())) {
                         return ResponseEntity.ok(Map.of(
-                                "role", "user",
-                                "message", "Login successful as user"
+                                "role", user.getRole(), // Use the role from the database
+                                "message", "Login successful"
                         ));
                     } else {
                         return ResponseEntity.status(401).body(Map.of("error", "Invalid credentials"));
