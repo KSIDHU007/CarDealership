@@ -9,6 +9,8 @@ import AppointmentPage from './pages/Booking'; // Import the AppointmentPage com
 import axios from 'axios'; // Axios for backend communication
 import Location from './pages/Location'; // Import the AppointmentPage component
 import AdminPage from './pages/AdminPage';
+import Financing from './pages/Financing';
+
 
 
 
@@ -79,6 +81,7 @@ function App() {
                     {/* Route for Appointment Booking */}
                     <Route path="/booking" element={<AppointmentPage />} />
                     <Route path="/Location" element={<Location />} />
+                    <Route path="/finance" element={<Financing />} />
 
                 </Routes>
             </div>
