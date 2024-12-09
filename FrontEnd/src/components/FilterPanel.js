@@ -1,85 +1,243 @@
-import React from 'react';
-import '../Style.K/styles.css'; // Correct path to your global styles
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Ensure axios is imported
 
-const FilterPanel = () => {
+const FilterPanel = ({ onFilterChange }) => {
+  const [filterOptions, setFilterOptions] = useState({
+    makes: [],
+    models: [],
+    years: [],
+    transmissions: [],
+    bodyStyles: [],
+    colors: [],
+    engines: [],
+    fuelTypes: [],
+  });
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    make: '',
+    model: '',
+    year: '',
+    minPrice: '',
+    maxPrice: '',
+    transmission: '',
+    bodyStyle: '',
+    color: '',
+    engine: '',
+    fuelType: '',
+  });
+
+  // Fetch filter options from the backend
+  useEffect(() => {
+    axios
+      .get('http://localhost:8081/api/vehicles/filters')
+      .then((response) => {
+        setFilterOptions(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching filter options:', error);
+      });
+  }, []);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  const applyFilters = () => {
+    const filters = {
+      make: selectedFilters.make || null,
+      model: selectedFilters.model || null,
+      year: selectedFilters.year || null,
+      minPrice: selectedFilters.minPrice || null,
+      maxPrice: selectedFilters.maxPrice || null,
+      transmission: selectedFilters.transmission || null,
+      bodyStyle: selectedFilters.bodyStyle || null,
+      color: selectedFilters.color || null,
+      engine: selectedFilters.engine || null,
+      fuelType: selectedFilters.fuelType || null,
+    };
+
+    axios
+      .post('http://localhost:8081/api/vehicles/search', filters)
+      .then((response) => {
+        onFilterChange(response.data); // Update the filtered cars
+      })
+      .catch((error) => {
+        console.error('Error applying filters:', error);
+      });
+  };
+
   return (
     <div className="filter-panel">
       <h3>Refine Results</h3>
+
+      {/* Make Filter */}
       <div className="filter-group">
         <label>Make</label>
-        <select>
-          <option>Any Make</option>
+        <select
+          name="make"
+          value={selectedFilters.make}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Make</option>
+          {filterOptions.makes.map((make, index) => (
+            <option key={index} value={make}>
+              {make}
+            </option>
+          ))}
         </select>
       </div>
+
+      {/* Model Filter */}
       <div className="filter-group">
         <label>Model</label>
-        <select>
-          <option>Any Model</option>
+        <select
+          name="model"
+          value={selectedFilters.model}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Model</option>
+          {filterOptions.models.map((model, index) => (
+            <option key={index} value={model}>
+              {model}
+            </option>
+          ))}
         </select>
       </div>
-      <div className="filter-row">
-        <div className="filter-group">
-          <label>Min Year</label>
-          <select>
-            <option>Min Year</option>
-          </select>
-        </div>
-        <div className="filter-group">
-          <label>Max Year</label>
-          <select>
-            <option>Max Year</option>
-          </select>
-        </div>
+
+      {/* Year Filter */}
+      <div className="filter-group">
+        <label>Year</label>
+        <select
+          name="year"
+          value={selectedFilters.year}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Year</option>
+          {filterOptions.years.map((year, index) => (
+            <option key={index} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="filter-row">
-        <div className="filter-group">
-          <label>Min Price</label>
-          <select>
-            <option>Min Price</option>
-          </select>
-        </div>
-        <div className="filter-group">
-          <label>Max Price</label>
-          <select>
-            <option>Max Price</option>
-          </select>
-        </div>
+
+      {/* Min Price Filter */}
+      <div className="filter-group">
+        <label>Min Price</label>
+        <input
+          type="number"
+          name="minPrice"
+          value={selectedFilters.minPrice}
+          onChange={handleFilterChange}
+          placeholder="Min Price"
+        />
       </div>
-      {/* Add similar fields for transmission, color, engine, fuel type */}
+
+      {/* Max Price Filter */}
+      <div className="filter-group">
+        <label>Max Price</label>
+        <input
+          type="number"
+          name="maxPrice"
+          value={selectedFilters.maxPrice}
+          onChange={handleFilterChange}
+          placeholder="Max Price"
+        />
+      </div>
+
+      {/* Transmission Filter */}
       <div className="filter-group">
         <label>Transmission</label>
-        <select>
-          <option>Any Transmission</option>
+        <select
+          name="transmission"
+          value={selectedFilters.transmission}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Transmission</option>
+          {filterOptions.transmissions.map((transmission, index) => (
+            <option key={index} value={transmission}>
+              {transmission}
+            </option>
+          ))}
         </select>
       </div>
+
+      {/* Body Style Filter */}
       <div className="filter-group">
         <label>Body Style</label>
-        <select>
-          <option>Any Body Style</option>
+        <select
+          name="bodyStyle"
+          value={selectedFilters.bodyStyle}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Body Style</option>
+          {filterOptions.bodyStyles.map((bodyStyle, index) => (
+            <option key={index} value={bodyStyle}>
+              {bodyStyle}
+            </option>
+          ))}
         </select>
       </div>
+
+      {/* Color Filter */}
       <div className="filter-group">
         <label>Color</label>
-        <select>
-          <option>Any Color</option>
+        <select
+          name="color"
+          value={selectedFilters.color}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Color</option>
+          {filterOptions.colors.map((color, index) => (
+            <option key={index} value={color}>
+              {color}
+            </option>
+          ))}
         </select>
       </div>
+
+      {/* Engine Filter */}
       <div className="filter-group">
         <label>Engine</label>
-        <select>
-          <option>Any Engine</option>
+        <select
+          name="engine"
+          value={selectedFilters.engine}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Engine</option>
+          {filterOptions.engines.map((engine, index) => (
+            <option key={index} value={engine}>
+              {engine}
+            </option>
+          ))}
         </select>
       </div>
+
+      {/* Fuel Type Filter */}
       <div className="filter-group">
         <label>Fuel Type</label>
-        <select>
-          <option>Any Fuel Type</option>
+        <select
+          name="fuelType"
+          value={selectedFilters.fuelType}
+          onChange={handleFilterChange}
+        >
+          <option value="">Any Fuel Type</option>
+          {filterOptions.fuelTypes.map((fuelType, index) => (
+            <option key={index} value={fuelType}>
+              {fuelType}
+            </option>
+          ))}
         </select>
       </div>
-      <div className="search-group">
-        <input type="text" placeholder="Keyword Search: Stock #" />
-        <button className="btn-search">Search</button>
-      </div>
+
+      {/* Search Button */}
+      <button className="btn-search" onClick={applyFilters}>
+        Search
+      </button>
     </div>
   );
 };

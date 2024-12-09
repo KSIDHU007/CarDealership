@@ -12,7 +12,7 @@ const LandingPage = () => {
             <section className="hero">
                 <div className="hero-content">
                     <h1>HONESTY | TRUTH | FOREVER</h1>
-                    <button className="cta-button">ALL INVENTORY</button>
+                    <button onClick={() => window.location.href = '/inventory'} className="cta-button">ALL INVENTORY</button>
                 </div>
             </section>
 

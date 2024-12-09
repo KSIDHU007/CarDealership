@@ -1,7 +1,7 @@
 package com.example.demo.cardealership.controller;
 
-import com.example.demo.cardealership.model.Inventory;
-import com.example.demo.cardealership.service.InventoryService;
+import com.example.demo.cardealership.model.Vehicle;
+import com.example.demo.cardealership.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,94 +14,65 @@ import java.util.Optional;
 public class InventoryController {
 
     @Autowired
-    private InventoryService inventoryService;
+    private VehicleService vehicleService;
 
-    /**
-     * Fetch all inventory items.
-     *
-     * @return List of all inventory items.
-     */
+    // Get all inventory items
     @GetMapping
-    public ResponseEntity<List<Inventory>> getAllInventory() {
-        List<Inventory> inventoryList = inventoryService.getAllInventory();
+    public ResponseEntity<List<Vehicle>> getAllInventory() {
+        List<Vehicle> inventoryList = vehicleService.findAllVehicles();
         if (inventoryList.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(inventoryList);
     }
 
-    /**
-     * Fetch inventory item by ID.
-     *
-     * @param id Inventory ID.
-     * @return Inventory item if found.
-     */
+    // Get inventory item by ID
     @GetMapping("/{id}")
-    public ResponseEntity<?> getInventoryById(@PathVariable Long id) {
-        Optional<Inventory> inventory = inventoryService.getInventoryById(id);
-        if (inventory.isPresent()) {
-            return ResponseEntity.ok(inventory.get());
-        } else {
-            return ResponseEntity.status(404).body("Inventory item not found with ID: " + id);
-        }
+    public ResponseEntity<Vehicle> getInventoryById(@PathVariable Long id) {
+        Optional<Vehicle> vehicle = vehicleService.findVehicleById(id);
+        return vehicle.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /**
-     * Add a new inventory item.
-     *
-     * @param inventory Inventory details.
-     * @return Saved inventory item.
-     */
+    // Add a new inventory item
     @PostMapping
-    public ResponseEntity<?> addInventory(@RequestBody Inventory inventory) {
+    public ResponseEntity<Vehicle> addInventory(@RequestBody Vehicle vehicle) {
         try {
-            Inventory addedInventory = inventoryService.addInventory(inventory);
-            return ResponseEntity.ok(addedInventory);
+            // Ensure stockNumber and image are provided for admin
+            if (vehicle.getStockNumber() == null || vehicle.getStockNumber().isEmpty()) {
+                return ResponseEntity.badRequest().body(null);
+            }
+
+            Vehicle savedVehicle = vehicleService.saveVehicle(vehicle);
+            return ResponseEntity.ok(savedVehicle);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error adding inventory: " + e.getMessage());
+            return ResponseEntity.status(500).body(null);
         }
     }
 
-    /**
-     * Update an existing inventory item.
-     *
-     * @param id        Inventory ID.
-     * @param inventory Updated inventory details.
-     * @return Updated inventory item if successful.
-     */
+    // Update an inventory item
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateInventory(@PathVariable Long id, @RequestBody Inventory inventory) {
-        try {
-            Optional<Inventory> existingInventory = inventoryService.getInventoryById(id);
-            if (existingInventory.isPresent()) {
-                inventory.setId(id); // Ensure the ID matches the one being updated
-                Inventory updatedInventory = inventoryService.addInventory(inventory);
-                return ResponseEntity.ok(updatedInventory);
-            } else {
-                return ResponseEntity.status(404).body("Inventory item not found with ID: " + id);
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error updating inventory: " + e.getMessage());
+    public ResponseEntity<Vehicle> updateInventory(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+        Optional<Vehicle> existingVehicle = vehicleService.findVehicleById(id);
+
+        if (existingVehicle.isPresent()) {
+            vehicle.setId(id); // Ensure the ID matches the one being updated
+            Vehicle updatedVehicle = vehicleService.saveVehicle(vehicle);
+            return ResponseEntity.ok(updatedVehicle);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
-    /**
-     * Delete an inventory item.
-     *
-     * @param id Inventory ID.
-     * @return Success message if deleted.
-     */
+    // Delete an inventory item
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteInventory(@PathVariable Long id) {
-        try {
-            boolean exists = inventoryService.existsById(id);
-            if (!exists) {
-                return ResponseEntity.status(404).body("Inventory item not found with ID: " + id);
-            }
-            inventoryService.deleteInventory(id);
-            return ResponseEntity.ok("Inventory item with ID " + id + " deleted successfully.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error deleting inventory: " + e.getMessage());
+    public ResponseEntity<String> deleteInventory(@PathVariable Long id) {
+        Optional<Vehicle> existingVehicle = vehicleService.findVehicleById(id);
+
+        if (existingVehicle.isPresent()) {
+            vehicleService.deleteVehicle(id);
+            return ResponseEntity.ok("Vehicle with ID " + id + " deleted successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }

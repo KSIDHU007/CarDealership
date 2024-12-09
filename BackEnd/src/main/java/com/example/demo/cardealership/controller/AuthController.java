@@ -17,7 +17,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    /**
+    /*
      * Registers a new user with a default role of "user" unless specified otherwise.
      */
     @PostMapping("/register")

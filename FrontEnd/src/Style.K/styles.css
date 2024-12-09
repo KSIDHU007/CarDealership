@@ -262,8 +262,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 400px; /* Let height adjust dynamically */
-  width: 250px;
+  height: 420px; /* Let height adjust dynamically */
+  width: 270px;
   text-align: center;
   transition: box-shadow 0.2s; /* Add hover shadow effect */
 }

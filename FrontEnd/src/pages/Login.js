@@ -29,9 +29,8 @@ const Login = ({ onLogin }) => {
             onLogin(response.data);
         } catch (error) {
             console.error('Login failed:', error.response?.data || error.message);
-            alert(error.response?.data?.error || 'Login failed: Incorrect username or password.');
         } finally {
-            setLoading(false); // Hide loading state
+            setLoading(false);
         }
     };
 

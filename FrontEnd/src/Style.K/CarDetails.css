@@ -118,29 +118,66 @@
 }
 
 /* Action Buttons */
-.actionbuttons a {
-    display: block; /* Makes the links behave like block elements */
-    text-align: center; /* Centers text inside the button */
-    width: 100%; /* Ensures full width */
-    padding: 10px; /* Adds padding for better size */
-    font-size: 1rem; /* Sets font size */
-    color: white; /* Text color */
-    margin-bottom: 10px; /* Spacing between buttons */
-    border: none; /* Removes default border */
-    border-radius: 5px; /* Rounds the edges */
-    cursor: pointer; /* Adds pointer cursor */
-    font-weight: bold; /* Makes text bold */
-    text-decoration: none; /* Removes underline from links */
-    transition: background-color 0.3s, transform 0.2s; /* Adds hover effect */
+.action-buttons {
+    display: flex;
+    justify-content: space-around; /* Space buttons evenly */
+    margin-top: 20px; /* Add space above the buttons */
+    gap: 15px; /* Space between buttons */
 }
 
-.info-button { background-color: #e74c3c; }
-.finance-button { background-color: #27ae60; }
-.directions-button { background-color: #8e44ad; }
+.action-buttons .info-button,
+.action-buttons .finance-button,
+.action-buttons .directions-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #007bff; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff; /* Text color */
+    background-color: white; /* Background color */
+    text-align: center; /* Center the text */
+    transition: all 0.3s ease; /* Smooth hover effect */
+    cursor: pointer;
+}
 
-.info-button:hover { background-color: #c0392b; }
-.finance-button:hover { background-color: #218c4a; }
-.directions-button:hover { background-color: #6f368b; }
+.action-buttons .info-button:hover,
+.action-buttons .finance-button:hover,
+.action-buttons .directions-button:hover {
+    background-color: #007bff; /* Hover background */
+    color: white; /* Hover text color */
+}
+
+.action-buttons .info-button {
+    border-color: #17a2b8; /* Info button color */
+    color: #17a2b8;
+}
+
+.action-buttons .info-button:hover {
+    background-color: #17a2b8; /* Hover background for info */
+    color: white; /* Hover text color for info */
+}
+
+.action-buttons .finance-button {
+    border-color: #28a745; /* Finance button color */
+    color: #28a745;
+}
+
+.action-buttons .finance-button:hover {
+    background-color: #28a745; /* Hover background for finance */
+    color: white; /* Hover text color for finance */
+}
+
+.action-buttons .directions-button {
+    border-color: #ffc107; /* Directions button color */
+    color: #ffc107;
+}
+
+.action-buttons .directions-button:hover {
+    background-color: #ffc107; /* Hover background for directions */
+    color: white; /* Hover text color for directions */
+}
 
 /* Location Info */
 .location-info {

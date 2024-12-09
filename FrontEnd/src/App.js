@@ -25,7 +25,6 @@ function App() {
             alert('Login successful!');
         } catch (error) {
             console.error('Login error:', error);
-            alert('Invalid username or password.');
         }
     };
 
@@ -36,7 +35,6 @@ function App() {
             alert('Signup successful! Please login.');
         } catch (error) {
             console.error('Signup error:', error);
-            alert('Signup failed. Please check your details.');
         }
     };
 

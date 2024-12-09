@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import FilterPanel from '../components/FilterPanel';
-import CarCard from '../components/CarCard';
-import axios from 'axios';
-import '../Style.K/styles.css';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import FilterPanel from "../components/FilterPanel";
+import CarCard from "../components/CarCard";
+import axios from "axios";
+import "../Style.K/styles.css";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [cars, setCars] = useState([]); // State to store inventory data
+  const [cars, setCars] = useState([]); // State to store filtered cars
 
-  // Fetch inventory data from the backend
-  useEffect(() => {
-    axios
-      .get('http://localhost:8081/api/inventory') // API endpoint for inventory
-      .then((response) => {
-        setCars(response.data); // Update state with fetched data
-      })
-      .catch((error) => {
-        console.error('Error fetching inventory:', error);
+  // Fetch cars based on filters
+  const fetchFilteredCars = async (filters) => {
+    try {
+      const response = await axios.get("http://localhost:8081/api/vehicles/search", {
+        params: filters, // Send filters as query parameters
       });
+      setCars(response.data);
+    } catch (error) {
+      console.error("Error fetching filtered cars:", error);
+    }
+  };
+
+  // Handle filter changes from the FilterPanel
+  const handleFilterChange = (filters) => {
+    fetchFilteredCars(filters); // Fetch cars with the updated filters
+  };
+
+  // Initial fetch of all cars
+  useEffect(() => {
+    fetchFilteredCars({}); // Fetch all cars initially
   }, []);
 
   // Function to handle "View Details" button
   const handleViewDetails = (car) => {
-      navigate('/car-details', { state: { car } });
+    navigate("/car-details", { state: { car } });
   };
-
 
   return (
     <div className="App">
@@ -41,11 +50,11 @@ const Home = () => {
       </div>
 
       <div className="container">
-        <FilterPanel />
+      <FilterPanel onFilterChange={(filteredCars) => setCars(filteredCars)} />
 
         <div className="car-list">
           {cars.length === 0 ? (
-            <p>No cars available in inventory. Check back later!</p>
+            <p>No cars available. Try adjusting the filters.</p>
           ) : (
             cars.map((car, index) => (
               <CarCard
