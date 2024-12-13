@@ -1,9 +1,7 @@
 package com.example.demo.cardealership.model;
 
 import jakarta.persistence.*;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "appointments")
@@ -11,23 +9,28 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Unique identifier for the appointment
+    private Long id;
 
     @Column(nullable = false)
-    private Long userId; // User ID associated with the appointment
+    private String customerName;
 
     @Column(nullable = false)
-    private Date date; // Appointment date
+    private String contact;
 
     @Column(nullable = false)
-    private Time time; // Appointment time
+    private String vehicle;
 
-    private String service; // Type of service requested (e.g., repair, inspection)
+    @Column(nullable = false)
+    private LocalDate appointmentDate;
 
-    private String status = "PENDING"; // Default status of the appointment
+    @Column(nullable = false)
+    private String serviceType;
 
-    @Column(updatable = false)
-    private Timestamp createdAt = new Timestamp(System.currentTimeMillis()); // Creation timestamp
+    @Column
+    private String additionalNotes;
+
+    public Appointment() {
+    }
 
     // Getters and Setters
     public Long getId() {
@@ -38,51 +41,51 @@ public class Appointment {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public Date getDate() {
-        return date;
+    public String getContact() {
+        return contact;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
-    public Time getTime() {
-        return time;
+    public String getVehicle() {
+        return vehicle;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setVehicle(String vehicle) {
+        this.vehicle = vehicle;
     }
 
-    public String getService() {
-        return service;
+    public LocalDate getAppointmentDate() {
+        return appointmentDate;
     }
 
-    public void setService(String service) {
-        this.service = service;
+    public void setAppointmentDate(LocalDate appointmentDate) {
+        this.appointmentDate = appointmentDate;
     }
 
-    public String getStatus() {
-        return status;
+    public String getServiceType() {
+        return serviceType;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public String getAdditionalNotes() {
+        return additionalNotes;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setAdditionalNotes(String additionalNotes) {
+        this.additionalNotes = additionalNotes;
     }
 }

@@ -4,15 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "vehicle") // Table name in the database
 public class Inventory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // Unique identifier for inventory item
-    private String make; // Make of the car
-    private String name; // Name of the car
+
+    private String make; // Make of the car (e.g., Toyota, Ford)
+    private String model;
     private Integer year; // Year of manufacture
     private String bodyStyle; // Body style (e.g., Sedan, SUV)
     private Integer odometer; // Mileage in kilometers or miles
@@ -43,12 +46,12 @@ public class Inventory {
         this.make = make;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Integer getYear() {
@@ -146,4 +149,5 @@ public class Inventory {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }

@@ -35,7 +35,8 @@ const LandingPage = () => {
             {/* Contact CTA */}
             <section className="contact-cta">
                 <h2>Ready to find your dream car?</h2>
-                <button className="contact-button">Contact Us Today</button>
+                <button onClick={() => window.location.href = '/booking'} className="contact-button">Contact Us Today</button>
+
             </section>
         </div>
     );

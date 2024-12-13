@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppointmentService {
@@ -13,23 +14,23 @@ public class AppointmentService {
     @Autowired
     private AppointmentRepository appointmentRepository;
 
-    /**
-     * Book a new appointment.
-     *
-     * @param appointment Appointment details.
-     * @return Saved appointment.
-     */
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
+
+    public Optional<Appointment> getAppointmentById(Long id) {
+        return appointmentRepository.findById(id);
+    }
+
+    public Appointment createAppointment(Appointment appointment) {
+        return appointmentRepository.save(appointment);
+    }
+
     public Appointment bookAppointment(Appointment appointment) {
         return appointmentRepository.save(appointment);
     }
 
-    /**
-     * Fetch all appointments for a specific user.
-     *
-     * @param userId User ID.
-     * @return List of appointments for the user.
-     */
-    public List<Appointment> getAppointmentsByUserId(Long userId) {
-        return appointmentRepository.findByUserId(userId);
+    public void deleteAppointment(Long id) {
+        appointmentRepository.deleteById(id);
     }
 }

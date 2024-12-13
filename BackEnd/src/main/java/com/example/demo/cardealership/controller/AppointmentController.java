@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/appointments")
@@ -15,41 +16,45 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    /**
-     * Book a new appointment.
-     *
-     * @param appointment Appointment details.
-     * @return Saved appointment.
-     */
-    @PostMapping
-    public ResponseEntity<?> bookAppointment(@RequestBody Appointment appointment) {
-        try {
-            if (appointment.getUserId() == null || appointment.getDate() == null || appointment.getTime() == null) {
-                return ResponseEntity.badRequest().body("Missing required fields: userId, date, or time.");
-            }
-            Appointment savedAppointment = appointmentService.bookAppointment(appointment);
-            return ResponseEntity.ok(savedAppointment);
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error booking appointment: " + e.getMessage());
+    @GetMapping
+    public ResponseEntity<List<Appointment>> getAllAppointments() {
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        return ResponseEntity.ok(appointments);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Appointment> getAppointmentById(@PathVariable Long id) {
+        Optional<Appointment> appointment = appointmentService.getAppointmentById(id);
+        if (appointment.isPresent()) {
+            return ResponseEntity.ok(appointment.get());
+        } else {
+            return ResponseEntity.notFound().build(); // Use a 404 response without a body
         }
     }
 
-    /**
-     * Fetch all appointments for a specific user.
-     *
-     * @param userId User ID.
-     * @return List of appointments for the user.
-     */
-    @GetMapping("/{userId}")
-    public ResponseEntity<?> getAppointmentsByUserId(@PathVariable Long userId) {
-        try {
-            List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
-            if (appointments.isEmpty()) {
-                return ResponseEntity.noContent().build(); // 204 No Content
-            }
-            return ResponseEntity.ok(appointments); // 200 OK
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Error fetching appointments: " + e.getMessage());
+
+    @PostMapping // Define POST mapping for booking an appointment
+    public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment) {
+        if (appointment.getCustomerName() == null ||
+                appointment.getContact() == null ||
+                appointment.getVehicle() == null ||
+                appointment.getAppointmentDate() == null ||
+                appointment.getServiceType() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Appointment savedAppointment = appointmentService.bookAppointment(appointment);
+        return ResponseEntity.ok(savedAppointment);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
+        Optional<Appointment> appointment = appointmentService.getAppointmentById(id);
+        if (appointment.isPresent()) {
+            appointmentService.deleteAppointment(id);
+            return ResponseEntity.ok("Appointment deleted successfully!");
+        } else {
+            return ResponseEntity.status(404).body("Appointment not found with ID: " + id);
         }
     }
 }
