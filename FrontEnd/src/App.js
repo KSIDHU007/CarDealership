@@ -10,6 +10,11 @@ import axios from 'axios'; // Axios for backend communication
 import Location from './pages/Location'; // Import the AppointmentPage component
 import AdminPage from './pages/AdminPage';
 import Financing from './pages/Financing';
+import WheelsAndTires from './pages/WheelsAndTires';
+import AutoRepair from './pages/AutoRepair';
+import AboutUs from './pages/AboutUs';
+
+
 
 
 
@@ -80,6 +85,12 @@ function App() {
                     <Route path="/booking" element={<AppointmentPage />} />
                     <Route path="/Location" element={<Location />} />
                     <Route path="/finance" element={<Financing />} />
+                    <Route path="/wheels" element={<WheelsAndTires />} />
+                    <Route path="/repair" element={<AutoRepair />} />
+                    <Route path="/about" element={<AboutUs />} />
+
+
+
 
                 </Routes>
             </div>
